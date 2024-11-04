@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Generator TROLLING</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background: radial-gradient(circle, #1a1a1a, #000);
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    transition: background 0.5s ease;
+    overflow: hidden;
+  }
+  h1 {
+    font-size: 3em;
+    color: #00ff99;
+    text-shadow: 0 0 10px rgba(0, 255, 153, 0.8), 0 0 20px rgba(0, 255, 153, 0.6);
+    margin: 0;
+    padding: 20px;
+  }
+  .container {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0px 0px 30px rgba(0, 255, 153, 0.7);
+    text-align: center;
+    width: 80%;
+    max-width: 600px;
+  }
+  button {
+    padding: 12px 24px;
+    margin: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1em;
+    color: #fff;
+    cursor: pointer;
+    background-color: #00ff99;
+    box-shadow: 0px 0px 10px rgba(0, 255, 153, 0.8);
+  }
+  input[type="number"], input[type="file"] {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #00ff99;
+    margin: 10px 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+  }
+  #generatedText {
+    margin-top: 20px;
+    font-size: 1.5em;
+    color: #00ff99;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 255, 153, 0.8);
+    max-height: 200px;
+    overflow-y: scroll;
+  }
+  #credits {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 1em;
+    color: #00ff99;
+  }
+  #credits a {
+    color: #ffcc00;
+    text-decoration: none;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Generator TROLLING</h1>
+  <button onclick="generateText()">Сгенерировать</button>
+  <input type="number" min="1" value="1" id="wordCountInput" placeholder="Number of words">
+  <p id="generatedText"></p>
+  <button onclick="changeTheme()">Сменить тему</button>
+  <button onclick="addCustomTemplate()">Добавить шаблон</button>
+  <input type="file" id="fileInput" style="display: none;" accept=".txt">
+  <button onclick="clearAll()">Очистить все</button>
+  <button onclick="copyAll()">Копировать все</button>
+</div>
+<div id="credits">Developed by <a href="https://t.me/voodyminingg">voody</a></div>
+
+<script>
+const shabl = ["ты телочка ебанная слабая я тебе глаза выткну блять,",
+"я тебе мамашу ебал слышишь меня,",
+"тупоголовый ты ребёнок дерьма сука,",
+"не убегай от моего бешанного хуя итак тебе мамашу ебал,",
+"слышишь нахуй черножопый ребёнок шлюхи я тебе зубы собью своим хуем,",
+"блять ты же понимаешь что ты тёлка ебанная слабая,",
+"так и так ебал твою мамашу шлюху во все щели,",
+"знай ребёнок дерьма ты сука до поры до времени слизуй с моего хуя сперму,",
+"я же уничтожу тебя нахуй свинью ебанную понимаешь нахуй,",
+"закрой ебало вообщ свое ебало дабы я тебя рабапидораса не слышал,",
+"мне итак похуй на тебя тупую дочь говна я буду убивать тебя,",
+"ты сука блять не дай бог откинешь ласты свои,",
+"м-да ребёнок дерьма ебанный я удивлюсь если ты данную пасту стерпишь блядь,",
+"ну так сука в любом случае я буду всегда тебя пиздить когда вижу тебя,",
+"ты же ебанная дочурка шлюхи котрой нужно набить ебало понимаешь меня сука,",
+"ты же блять тут нечто ебанное детище дерьма сранного на которое все плювать будут,",
+"ну ебучий ребёнок шлюхи не терпи моего хуя,",
+"я же тебе сломаю ебало тут просто напросто,",
+"ты слышишь ты тёлка ебанная куртизанская,",
+"я вижу ты от фантазии отстаешь на далёкое ростояние,",
+"прямо щас начну ломать твоё ебало,",
+"чисто трахал твою мать в загоне для лошадей это классика жанра для такой шлюхи,",
+"я в любом случае буду ломать твоё ебало хача ебанного блять ты же понимаешь что ты тут максимум пешка ебанная,",
+"сука ебучий детеныш шлюхи ты можешь быть быстрее таки так ждать таких нудных медленных детей шлюх лень,",
+"чисто начну ебать твою мамашу да так сильно что ебанутая рабыня пениса нахуй потеряет сознание,",
+"ты же понимаешь меня сынок дерьма что я прямо щас тебе нахуй тут глаза выдавлю хуем чтобы ты нихуя не видел,",
+"ты в любом случае ребёночек шлюхи ну в любом случае я уверен что ты сын шалавы,",
+"чисто начну нахуй поочерёдно ломать твоё ебало да так что у тебя нахуй кровь потечёт,",
+"я блять возьму буду хуем своим барахтаться в твоём расчлененом теле ты же понимаешь что ты тупой сынок бляди,",
+"же сука твоей мамашке шлюхи челядь нахуй поломаю корове ебанной,",
+"ну сука неразборчевый сынок шлюхи упитанный ты где блять,",
+"давай я буду сука терзать своим хуем твоё жировое ебало так скажем жирного сынка шлюхи,",
+"я сука возьму заточку нахуй и найду твоего отца ебанного санного блять так и засуну ему в его промежность заточку понимаешь меня,",
+"ода сынок бляди я тебе нахуй прям щас начинаю ломать твоё ебало чтобы ты больше говорить не мог,",
+"давай же ебанный потешный ребёнок шлюхи бери себя в руки я щас достану свою хуятину и буду сувать в промежность уст твоей матери шалавы ебучей,",
+"давай ебанный ребёнок дерьма приступай к минету,",
+"я тебе сука буду калошматмть как только могу,",
+"ты ребёнок шлюхи сука ебанный ты нахуй ты терпила блять,",
+"ебанутая на голову рабыня пениса не убегай сука,",
+"я тебя буду поочерёдно расчленяют тут понимаешь нахуй,",
+"ты же ебанная тупоголовая,",
+"пидорасина так скажем чекнутая,",
+"так сочно сука начну ебать твою мать шалаву,",
+"ода давай не потеряй там рассудок от моего хуя тупой сын шлюхи,",
+"на голову бешанный моим хуем сынец бляди я про тебя сынка дерьма,",
+"фрик ебанутый же здесь,",
+"ты же фраер нахуй ебучий котрому я мать ебал,",
+"ей терпила ебанная отсоси хуя моего,",
+"ты сука нахуй шизофреничка ебанная на голову ебанутая слышишь,",
+"тёлка ебаная медленная давай я тебе ебало сломаю сука,",
+"так сука ебаный франкенштейн нахуй в голове гвозди а не энцефалон вот сука ебучая глупая,",
+"ты омежественная терпила и рабыня хуя ебанная,",
+"сука мнимый тупой сынок шлюхи запомни что я твою мамашу ебал до потери рассудка её,",
+"ты же просто глупый детеныш дерьма ебанный,",
+"я тебе мать ебал слышишь,",
+"ты сука шестой номер нахуй пешка ебанная,",
+"давай отсоси моего пениса рефлексируй сын шалавы,",
+"ну-ка сынок шлюхи быстрее тащи сюда свои копыта буду ломать твоё ебало нахуй,",
+"ты блять закрой уже ебало свое пока я тебе нахуй так скажем череп не свернул сыну шлюхи,",
+"вот блять так и буду ебать твою наглую мамашу шалаву ебанную сука чисто рабыню хуя дикую которая фанатеет по моей залупе,",
+"ты же понимаешь что ты нахуй тут копрофильная дочка бляди,",
+"я тебе сука вырву руки чтобы ты нахуй не занимался говносроллингом тупоголовый сынок шлюхи,",
+"давай терпеть хуя моего живо сынишка бляди не дай бог ты не перебьеш данную пасту я тебе зубы свка выбью,",
+"ну же сука недроцибал ебанный давай живее иди сюда я буду ебать тебе мамашу шалаву твою слышишь,",
+"грязный омежественный сынишка шлюшки слышишь меня ебал тебе мамашу понял или нет,",
+"ну прям щас начну сука рвать твою задницу хуэм своим нахуй,",
+"тупой ребёнок дерьма нахуй,",
+"гомик сука ебучий я тебе прям щас буду ломать челядь твою своей хуиной ты понял меня нахуй,",
+"давай тащи свое черное ебало сына бляди прямо к моему хую,",
+"щас буду тебе ебать твою мамашу шлюху нахуй ты же понимаешь сука что данная шалавочка будет слизывать с горлышка крышки мою сперму когда я кончу ибо данная дочь шлюхи умоляла не кончать её дабы не родить тебя сынка шлюхи,"];
+const colors = ['#00ff99', '#ff0044', '#9b59b6', '#f1c40f', '#3498db', '#00c0ff', '#ff77e9'];
+let currentColorIndex = 0;
+
+function generateText() {
+  const result_generate = [];
+  const wordCount = document.getElementById('wordCountInput').value;
+  const fileInput = document.getElementById('fileInput');
+
+  if (fileInput.files && fileInput.files[0]) {
+    const reader = new FileReader();
+    
+    reader.onload = function(e) {
+      const text = e.target.result;
+      const lines = text.split('\n').map(line => line.trim()).filter(line => line);
+
+      for (let i = 0; i < wordCount; i++) {
+        const count = lines[Math.floor(Math.random() * lines.length)];
+        if (!result_generate.includes(count)) {
+          result_generate.push(count);
+        }
+      }
+
+      const resultText = result_generate.map(line => `${line}`).join(' ');
+      document.getElementById('generatedText').innerText = resultText;
+    }
+
+    reader.readAsText(fileInput.files[0]);
+  } else {
+    for (let i = 0; i < wordCount; i++) {
+      const count = shabl[Math.floor(Math.random() * shabl.length)];
+      if (!result_generate.includes(count)) {
+        result_generate.push(count);
+      }
+    }
+
+    const resultText = result_generate.map(line => `${line}`).join(' ');
+    document.getElementById('generatedText').innerText = resultText;
+  }
+}
+
+function changeTheme() {
+  currentColorIndex = (currentColorIndex + 1) % colors.length;
+  const color = colors[currentColorIndex];
+  const boxShadowColor = color + 'b3';
+  
+  document.body.style.background = `radial-gradient(circle, #1a1a1a, #000)`;
+  document.querySelector('.container').style.backgroundColor = `rgba(0, 0, 0, 0.8)`;
+  document.querySelector('.container').style.boxShadow = `0px 0px 30px ${boxShadowColor}`;
+  
+  document.querySelectorAll('button').forEach(button => {
+    button.style.backgroundColor = color;
+    button.style.boxShadow = `0px 0px 10px ${boxShadowColor}`;
+  });
+  
+  const generatedText = document.getElementById('generatedText');
+  generatedText.style.color = color;
+  generatedText.style.boxShadow = `0px 0px 10px ${boxShadowColor}`;
+  generatedText.style.overflowY = 'auto';
+  generatedText.style.maxHeight = '400px';
+    
+  document.getElementById('credits').style.color = color;
+  document.getElementById('credits').style.textShadow = `0 0 10px ${boxShadowColor}`;
+  
+  document.querySelectorAll('input[type="number"], input[type="file"]').forEach(input => {
+    input.style.borderColor = color;
+    input.style.backgroundColor = `rgba(0, 0, 0, 0.5)`;
+  });
+
+  document.querySelector('h1').style.color = color;
+  document.querySelector('h1').style.textShadow = `0 0 10px ${boxShadowColor}, 0 0 20px ${boxShadowColor}`;
+}
+
+
+function addCustomTemplate() {
+  const fileInput = document.getElementById('fileInput');
+  fileInput.click();
+}
+
+function clearAll() {
+  document.getElementById('generatedText').innerText = '';
+}
+
+function copyAll() {
+  const generatedText = document.getElementById('generatedText');
+  const text = generatedText.innerText;
+  
+  if (text.trim() === '') {
+    alert('Что ты собрался скопировать?!');
+  } else {
+    navigator.clipboard.writeText(text);
+    alert('Текст скопирован');
+  }
+}
+
+document.getElementById('fileInput').addEventListener('change', function() {
+  const file = document.getElementById('fileInput').files[0];
+  if (file && file.name.endsWith('.txt')) {
+    document.getElementById('generatedText').innerText = `Твой шаблон: ${file.name}`;
+  } else {
+    alert('Выбери файл .txt!');
+    this.value = '';
+  }
+});
+</script>
+</body>
+</html>
