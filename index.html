@@ -250,10 +250,8 @@ function copyAll() {
   const text = generatedText.innerText;
   
   if (text.trim() === '') {
-    alert('Что ты собрался скопировать?!');
   } else {
     navigator.clipboard.writeText(text);
-    alert('Текст скопирован');
   }
 }
 
@@ -262,7 +260,6 @@ document.getElementById('fileInput').addEventListener('change', function() {
   if (file && file.name.endsWith('.txt')) {
     document.getElementById('generatedText').innerText = `Твой шаблон: ${file.name}`;
   } else {
-    alert('Выбери файл .txt!');
     this.value = '';
   }
 });
